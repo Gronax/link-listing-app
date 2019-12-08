@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getLinks, updatePoints } from '../redux/Modules/links'
+import { getLinks, updatePoints, deleteLink } from '../redux/Modules/links'
 import { Card, Grid, Button } from '@material-ui/core'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -55,6 +55,7 @@ class LinkList extends Component {
               <Button onClick={() => { updatePoints(link.id, false); getLinks() }}><ArrowDownwardIcon fontSize="inherit" />Down Vote</Button>
             </Grid>
           </Grid>
+          <div className='card__delete-icon' onClick={() => { deleteLink(link.id); getLinks() }}>x</div>
         </Card>
       )       
     }) : null
@@ -94,4 +95,4 @@ const mapStateToProps = ({links}) => {
   }
 }
 
-export default connect(mapStateToProps, {getLinks, updatePoints})(LinkList)
+export default connect(mapStateToProps, {getLinks, updatePoints, deleteLink})(LinkList)

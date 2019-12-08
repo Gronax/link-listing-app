@@ -10,7 +10,7 @@ const FORM_NAME = 'links_store'
 export const ADD_LINK = 'ADD_LINK'
 export const GET_LINKS = 'GET_LINKS'
 export const UPDATE_POINTS = 'UPDATE_POINTS'
-export const DELETE_INVOICE = 'DELETE_INVOICE'
+export const DELETE_LINK = 'DELETE_LINK'
 
 function CreateUUID() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
@@ -90,16 +90,20 @@ export function updatePoints (id, isUpvote) {
   }
 }
 
-export function deleteLink (id, callback) {
-  const request = axios.post(`/uyelik/delete-link.json/${id}`)
-    .then((response) => {
-      callback()
-      toastr.light('', response.data.message, {icon: 'success'})
-    })
+export function deleteLink (id) {
+  let myStore = store.get(FORM_NAME) || []
+  myStore.map(item => {
+    if (item.id === id) {
+      toastr.success('Success', `${item.link_name} removed.`)
+    }
+  })
+  myStore = myStore.filter(obj => obj.id !== id)
+  store.set(FORM_NAME, myStore)
+  console.log('myStore', myStore)
 
   return {
-    type: DELETE_INVOICE,
-    payload: request
+    type: DELETE_LINK,
+    payload: myStore
   }
 }
 
