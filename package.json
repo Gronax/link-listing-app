@@ -1,7 +1,7 @@
 {
   "name": "link-listing-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Link Vote Challenge",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/Gronax/link-listing-app.git"
   },
-  "author": "",
+  "author": "Mert Avcı <mertavci13@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Gronax/link-listing-app/issues"
@@ -40,8 +40,7 @@
     "redux-form": "^8.2.6",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "store2": "^2.10.0",
-    "typeface-roboto": "0.0.75"
+    "store2": "^2.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",

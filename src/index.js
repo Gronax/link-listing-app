@@ -13,9 +13,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 // styling
 import './styles/base.scss';
 
-// const theme = createMuiTheme();
-
-// Or Create your Own theme:
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -24,7 +21,8 @@ const theme = createMuiTheme({
     }
   },
 )
-reactDom.render(
+
+reactDom.render((
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <ConnectedRouter history={history}>
@@ -41,6 +39,5 @@ reactDom.render(
       />
       <CustomDialog />
     </MuiThemeProvider>
-  </Provider>,
-  document.getElementById('root')
-);
+  </Provider>
+), document.getElementById('root'))

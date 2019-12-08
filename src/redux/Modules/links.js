@@ -8,10 +8,8 @@ const FORM_NAME = 'links_store'
 // Actions
 export const ADD_LINK = 'ADD_LINK'
 export const GET_LINKS = 'GET_LINKS'
-export const UPDATE_INVOICE = 'UPDATE_INVOICE'
+export const UPDATE_POINTS = 'UPDATE_POINTS'
 export const DELETE_INVOICE = 'DELETE_INVOICE'
-
-let nextTodoId = 0
 
 function CreateUUID() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
@@ -54,6 +52,7 @@ export function addLink (values) {
 
 export function getLinks (page) {
   const myStore = store.get(FORM_NAME) || []
+  // TODO: make sorting here
 
   return {
     type: GET_LINKS,
@@ -64,16 +63,24 @@ export function getLinks (page) {
 }
 
 
-export function updateLink (id, values, callback) {
-  const request = axios.post(`/uyelik/edit-link.json/${id}`, values)
-    .then((response) => {
-      callback()
-      toastr.light('', response.data.message, {icon: 'success'})
-    })
+export function updatePoints (id, isUpvote) {
+  let myStore = store.get(FORM_NAME) || []
+  
+  const newStore = myStore.map(item => {
+    let temp = Object.assign({}, item);
+    if (temp.id === id) {
+      isUpvote ? temp.points++ : temp.points--
+    }
+    return temp
+  })
+
+  store.set(FORM_NAME, newStore)
 
   return {
-    type: UPDATE_INVOICE,
-    payload: request
+    type: UPDATE_POINTS,
+    payload: {
+      links: newStore
+    }
   }
 }
 

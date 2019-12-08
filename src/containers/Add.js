@@ -88,27 +88,8 @@ class App extends Component {
   }
 };
 
-// const mapDispatchToProps = {
-//   addLink
-// }
-
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(reduxForm({
-//   form: 'link-form',
-//   enableReinitialize: true
-// })(App))
-
-// export default connect(mapStateToProps, {createInvoice, readAllInvoices, updateInvoice, updateTicketInvoice, readDepartments, change})(reduxForm({
-//   validate,
-//   form: 'invoice-form',
-//   enableReinitialize: true
-// })(InvoiceAction)
-// )
 export default connect(null, {addLink})(reduxForm({
   form: 'link-form',
   validate,
-  // enableReinitialize: true
 })(App)
 )
