@@ -1,6 +1,7 @@
 import { toastr } from 'react-redux-toastr'
 import store from 'store2'
 import moment from 'moment'
+import sort from 'fast-sort'
 
 const initialState = {}
 const FORM_NAME = 'links_store'
@@ -50,9 +51,14 @@ export function addLink (values) {
   }
 }
 
-export function getLinks (page) {
+export function getLinks (order = 'desc') {
   const myStore = store.get(FORM_NAME) || []
-  // TODO: make sorting here
+  const pointsOrder = order === 'asc' ? { asc: u => u.points } : { desc: u => u.points }
+
+  sort(myStore).by([
+    pointsOrder,
+    { desc: u => u.created_date }
+  ])
 
   return {
     type: GET_LINKS,

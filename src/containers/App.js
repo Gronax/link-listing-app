@@ -1,17 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Card, Avatar, Typography, Grid } from '@material-ui/core'
+import { Container, Card, Avatar, Typography, Grid, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
-import SubmitNewLink from './SubmitNewLink'
 import LinkList from './LinkList'
+import { getLinks } from '../redux/Modules/links'
 
 class App extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      order: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange (event) {
+    const { getLinks } = this.props
+    getLinks(event.target.value)
+    this.setState({ order: event.target.value })
   }
 
   render() {
     const { history } = this.props
+    const { order } = this.state
 
     return(
       <Container maxWidth="xs">
@@ -25,10 +38,28 @@ class App extends Component {
             </Grid>
           </Grid>
         </Card>
-        <LinkList />
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <FormControl variant="filled">
+              <InputLabel id="select-label">Order by</InputLabel>
+              <Select
+                labelId="select-label"
+                onChange={this.handleChange}
+                className='select'
+                value={order}
+              >
+              <MenuItem value='desc'>Most Voted (Z > A)</MenuItem>
+              <MenuItem value='asc'>Less Voted (A > Z)</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <LinkList />
+          </Grid>
+        </Grid>
       </Container>
     )
   }
 }
 
-export default connect()(App)
+export default connect(null, {getLinks})(App)
