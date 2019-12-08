@@ -10,13 +10,14 @@
   "env": {
     "browser": true,
     "node": true
-  },
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
-  "rules": {
-    "prettier/prettier": ["error"],
-    "semi": 2,
-    "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
+  // "extends": ["airbnb", "prettier"],
+  // "plugins": ["prettier"],
+  // "rules": {
+  //   "prettier/prettier": ["error"],
+  //   "semi": 2,
+  //   "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
+  //   "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+  //   "no-plusplus": "off"
+  // }
 }

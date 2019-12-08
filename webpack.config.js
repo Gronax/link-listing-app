@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// Load Roboto typeface
+require('typeface-roboto')
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -10,7 +12,9 @@ module.exports = {
     filename: 'bundle.js',
   },
   devServer: {
+    historyApiFallback: true,
     contentBase: './build',
+    hot: true
   },
   module: {
     rules: [
